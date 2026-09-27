@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EMBER — Modern Dining</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f3efe7;
+    color:#171713;
+    font-family:"DM Sans",sans-serif;
+    overflow-x:hidden;
+}
+
+/* ================= NAV ================= */
+
+nav{
+    width:100%;
+    height:82px;
+    padding:0 6vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(23,23,19,.12);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:600;
+    letter-spacing:5px;
+}
+
+.nav-links{
+    display:flex;
+    gap:38px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#171713;
+    font-size:12px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#b64d32;
+}
+
+.reserve{
+    border:1px solid #171713;
+    padding:12px 20px;
+    text-decoration:none;
+    color:#171713;
+    font-size:11px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.reserve:hover{
+    background:#171713;
+    color:#f3efe7;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:calc(100vh - 82px);
+    padding:7vw 6vw;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:5vw;
+}
+
+.hero-copy{
+    position:relative;
+    z-index:3;
+    transition:transform .25s ease-out;
+}
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:10px;
+    letter-spacing:3px;
+    color:#b64d32;
+    margin-bottom:30px;
+}
+
+.eyebrow span{
+    width:35px;
+    height:1px;
+    background:#b64d32;
+}
+
+.hero h1{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(65px,9vw,145px);
+    line-height:.82;
+    font-weight:500;
+    letter-spacing:-6px;
+}
+
+.hero h1 em{
+    color:#b64d32;
+    font-weight:500;
+}
+
+.hero-text{
+    max-width:430px;
+    margin-top:38px;
+    color:#66635b;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.hero-actions{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    margin-top:35px;
+}
+
+.primary-btn{
+    background:#171713;
+    color:#f3efe7;
+    padding:17px 27px;
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:#b64d32;
+}
+
+.secondary{
+    color:#171713;
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:2px;
+    border-bottom:1px solid #171713;
+    padding-bottom:5px;
+}
+
+/* ================= FOOD ART ================= */
+
+.visual{
+    position:relative;
+    height:620px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .25s ease-out;
+}
+
+.art-board{
+    width:min(500px,90%);
+    height:570px;
+    background:#1b1b17;
+    position:relative;
+    overflow:hidden;
+    transform:rotate(2deg);
+    box-shadow:25px 30px 60px rgba(0,0,0,.15);
+}
+
+.art-title{
+    position:absolute;
+    top:27px;
+    left:30px;
+    color:#f3efe7;
+    font-size:10px;
+    letter-spacing:4px;
+}
+
+.art-number{
+    position:absolute;
+    right:28px;
+    top:25px;
+    color:#b64d32;
+    font-size:12px;
+}
+
+.food{
+    position:absolute;
+    left:50%;
+    top:51%;
+    transform:translate(-50%,-50%);
+    width:390px;
+    height:390px;
+}
+
+/* plate */
+
+.plate{
+    position:absolute;
+    width:330px;
+    height:330px;
+    border-radius:50%;
+    background:#ded7c9;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    box-shadow:
+        0 25px 35px rgba(0,0,0,.3),
+        inset 0 0 0 12px #eee9df;
+}
+
+.plate-inner{
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    border:1px solid rgba(23,23,19,.18);
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
+/* food */
+
+.steak{
+    position:absolute;
+    width:180px;
+    height:105px;
+    background:#713a2a;
+    border-radius:55% 45% 48% 52%;
+    left:50%;
+    top:49%;
+    transform:translate(-50%,-50%) rotate(-10deg);
+    box-shadow:
+        inset 15px 8px 0 rgba(255,255,255,.06),
+        0 10px 18px rgba(0,0,0,.2);
+}
+
+.steak:before,
+.steak:after{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:2px;
+    background:#c48666;
+    opacity:.45;
+    transform:rotate(25deg);
+}
+
+.steak:before{
+    top:35px;
+    left:30px;
+}
+
+.steak:after{
+    top:60px;
+    left:40px;
+}
+
+.leaf{
+    position:absolute;
+    width:70px;
+    height:35px;
+    background:#66704e;
+    border-radius:100% 0 100% 0;
+}
+
+.leaf.one{
+    left:90px;
+    top:135px;
+    transform:rotate(-30deg);
+}
+
+.leaf.two{
+    right:75px;
+    bottom:125px;
+    transform:rotate(150deg);
+}
+
+.leaf.three{
+    right:90px;
+    top:115px;
+    transform:rotate(45deg);
+}
+
+.sauce{
+    position:absolute;
+    width:65px;
+    height:25px;
+    background:#b64d32;
+    border-radius:50%;
+}
+
+.sauce.one{
+    left:80px;
+    bottom:95px;
+    transform:rotate(-20deg);
+}
+
+.sauce.two{
+    right:70px;
+    top:185px;
+    transform:rotate(25deg);
+}
+
+.art-caption{
+    position:absolute;
+    bottom:25px;
+    left:30px;
+    color:#8f8b80;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* ================= MARQUEE ================= */
+
+.marquee{
+    background:#b64d32;
+    color:#f3efe7;
+    overflow:hidden;
+    white-space:nowrap;
+    padding:18px 0;
+}
+
+.marquee-track{
+    display:inline-block;
+    animation:move 18s linear infinite;
+    font-family:"Playfair Display",serif;
+    font-style:italic;
+    font-size:22px;
+}
+
+.marquee-track span{
+    margin:0 35px;
+}
+
+@keyframes move{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+    padding:150px 9vw;
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:10vw;
+}
+
+.small-label{
+    font-size:10px;
+    letter-spacing:3px;
+    color:#b64d32;
+}
+
+.intro h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(40px,5vw,75px);
+    line-height:1;
+    font-weight:500;
+}
+
+.intro h2 em{
+    color:#b64d32;
+}
+
+.intro p{
+    font-size:19px;
+    line-height:1.8;
+    color:#646159;
+    max-width:650px;
+}
+
+/* ================= MENU ================= */
+
+.menu{
+    background:#171713;
+    color:#f3efe7;
+    padding:120px 7vw;
+}
+
+.menu-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:65px;
+}
+
+.menu-head h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(55px,7vw,105px);
+    font-weight:500;
+    line-height:.85;
+}
+
+.menu-head p{
+    max-width:270px;
+    color:#98958c;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.menu-list{
+    border-top:1px solid #3a3a34;
+}
+
+.dish{
+    display:grid;
+    grid-template-columns:90px 1fr auto;
+    gap:35px;
+    align-items:center;
+    padding:30px 0;
+    border-bottom:1px solid #3a3a34;
+    transition:.35s;
+}
+
+.dish:hover{
+    padding-left:15px;
+}
+
+.dish-number{
+    color:#b64d32;
+    font-size:12px;
+}
+
+.dish h3{
+    font-family:"Playfair Display",serif;
+    font-size:28px;
+    font-weight:500;
+}
+
+.dish p{
+    color:#858279;
+    margin-top:7px;
+    font-size:12px;
+}
+
+.price{
+    font-family:"Playfair Display",serif;
+    font-size:21px;
+}
+
+/* ================= STORY ================= */
+
+.story{
+    padding:140px 7vw;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:8vw;
+    align-items:center;
+}
+
+.story-card{
+    min-height:520px;
+    background:#d7d0c2;
+    position:relative;
+    padding:45px;
+    overflow:hidden;
+}
+
+.story-card:after{
+    content:"";
+    position:absolute;
+    width:330px;
+    height:330px;
+    border-radius:50%;
+    background:#b64d32;
+    right:-120px;
+    bottom:-120px;
+}
+
+.story-card h3{
+    position:relative;
+    z-index:2;
+    font-family:"Playfair Display",serif;
+    font-size:70px;
+    line-height:.9;
+    font-weight:500;
+}
+
+.story-card small{
+    position:absolute;
+    bottom:35px;
+    left:45px;
+    z-index:3;
+    letter-spacing:3px;
+    font-size:9px;
+}
+
+.story-copy h2{
+    font-family:"Playfair Display",serif;
+    font-size:60px;
+    line-height:1;
+    font-weight:500;
+}
+
+.story-copy p{
+    margin-top:30px;
+    color:#68655d;
+    line-height:1.9;
+    max-width:500px;
+}
+
+/* ================= CTA ================= */
+
+.final{
+    background:#b64d32;
+    color:#f3efe7;
+    text-align:center;
+    padding:130px 20px;
+}
+
+.final p{
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:25px;
+}
+
+.final h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(60px,10vw,140px);
+    font-weight:500;
+    line-height:.8;
+}
+
+.final a{
+    display:inline-block;
+    margin-top:45px;
+    padding:17px 30px;
+    background:#171713;
+    color:#f3efe7;
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#171713;
+    color:#f3efe7;
+    padding:35px 6vw;
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+footer span{
+    color:#77746c;
+}
+
+/* ================= REVEAL ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity .8s ease, transform .8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    nav{
+        padding:0 5vw;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding:70px 6vw;
+    }
+
+    .hero h1{
+        font-size:70px;
+        letter-spacing:-4px;
+    }
+
+    .visual{
+        height:470px;
+    }
+
+    .art-board{
+        height:440px;
+    }
+
+    .food{
+        transform:translate(-50%,-50%) scale(.82);
+    }
+
+    .intro{
+        grid-template-columns:1fr;
+        padding:100px 7vw;
+        gap:45px;
+    }
+
+    .menu{
+        padding:90px 6vw;
+    }
+
+    .menu-head{
+        display:block;
+    }
+
+    .menu-head p{
+        margin-top:25px;
+    }
+
+    .dish{
+        grid-template-columns:35px 1fr auto;
+        gap:15px;
+    }
+
+    .dish h3{
+        font-size:22px;
+    }
+
+    .story{
+        grid-template-columns:1fr;
+        padding:100px 7vw;
+    }
+
+    .story-card{
+        min-height:400px;
+    }
+
+    .story-card h3{
+        font-size:55px;
+    }
+
+    .story-copy h2{
+        font-size:48px;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">EMBER</div>
+
+    <div class="nav-links">
+        <a href="#menu">MENU</a>
+        <a href="#story">STORY</a>
+        <a href="#contact">CONTACT</a>
+    </div>
+
+    <a class="reserve" href="#contact">RESERVE</a>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-copy">
+        <div class="eyebrow">
+            <span></span>
+            MODERN FIRE KITCHEN
+        </div>
+
+        <h1>
+            EAT<br>
+            WITH<br>
+            <em>FIRE.</em>
+        </h1>
+
+        <p class="hero-text">
+            A modern dining experience built around fire,
+            seasonal ingredients and simple food made with
+            serious attention.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#menu" class="primary-btn">EXPLORE MENU</a>
+            <a href="#story" class="secondary">OUR STORY</a>
+        </div>
+    </div>
+
+
+    <div class="visual" id="visual">
+
+        <div class="art-board">
+
+            <div class="art-title">
+                EMBER / KITCHEN
+            </div>
+
+            <div class="art-number">
+                24
+            </div>
+
+            <div class="food">
+
+                <div class="plate">
+                    <div class="plate-inner"></div>
+                </div>
+
+                <div class="steak"></div>
+
+                <div class="leaf one"></div>
+                <div class="leaf two"></div>
+                <div class="leaf three"></div>
+
+                <div class="sauce one"></div>
+                <div class="sauce two"></div>
+
+            </div>
+
+            <div class="art-caption">
+                CHARCOAL · HERBS · FLAME
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MARQUEE -->
+<div class="marquee">
+    <div class="marquee-track">
+        FIRE · FLAVOR · SEASON · FIRE · FLAVOR · SEASON ·
+        <span>EMBER</span>
+        FIRE · FLAVOR · SEASON · FIRE · FLAVOR · SEASON ·
+    </div>
+</div>
+
+
+<!-- INTRO -->
+<section class="intro reveal">
+
+    <div>
+        <div class="small-label">THE PHILOSOPHY</div>
+    </div>
+
+    <div>
+        <h2>
+            GOOD FOOD<br>
+            DOESN'T NEED<br>
+            <em>COMPLICATION.</em>
+        </h2>
+
+        <p style="margin-top:35px;">
+            We keep the ingredients honest, the fire hot,
+            and the plates focused. Every dish is designed
+            around balance, texture and flavor.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- MENU -->
+<section class="menu" id="menu">
+
+    <div class="menu-head reveal">
+
+        <h2>MENU.</h2>
+
+        <p>
+            A small selection from our kitchen.
+            Our menu changes with the season.
+        </p>
+
+    </div>
+
+
+    <div class="menu-list">
+
+        <div class="dish reveal">
+            <div class="dish-number">01</div>
+
+            <div>
+                <h3>Charred Ribeye</h3>
+                <p>Smoked butter · herbs · roasted garlic</p>
+            </div>
+
+            <div class="price">$32</div>
+        </div>
+
+
+        <div class="dish reveal">
+            <div class="dish-number">02</div>
+
+            <div>
+                <h3>Fire Roasted Salmon</h3>
+                <p>Lemon · wild herbs · crispy potatoes</p>
+            </div>
+
+            <div class="price">$26</div>
+        </div>
+
+
+        <div class="dish reveal">
+            <div class="dish-number">03</div>
+
+            <div>
+                <h3>Ember Pasta</h3>
+                <p>Tomato · parmesan · black pepper</p>
+            </div>
+
+            <div class="price">$21</div>
+        </div>
+
+
+        <div class="dish reveal">
+            <div class="dish-number">04</div>
+
+            <div>
+                <h3>Burnt Peach</h3>
+                <p>Vanilla cream · honey · sea salt</p>
+            </div>
+
+            <div class="price">$12</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STORY -->
+<section class="story" id="story">
+
+    <div class="story-card reveal">
+        <h3>
+            FROM<br>
+            FIRE<br>
+            TO<br>
+            TABLE.
+        </h3>
+
+        <small>EST. 2026 — CAIRO</small>
+    </div>
+
+
+    <div class="story-copy reveal">
+
+        <div class="small-label">OUR STORY</div>
+
+        <h2 style="margin-top:25px;">
+            A TABLE<br>
+            WORTH<br>
+            <em>COMING BACK TO.</em>
+        </h2>
+
+        <p>
+            EMBER started with one simple idea:
+            create a place where food feels special
+            without feeling complicated.
+        </p>
+
+        <p>
+            Open fire, good ingredients, warm service
+            and a room designed for long conversations.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+<section class="final" id="contact">
+
+    <p>YOUR TABLE IS WAITING</p>
+
+    <h2>
+        SEE YOU<br>
+        TONIGHT.
+    </h2>
+
+    <a href="mailto:hello@ember.example">
+        MAKE A RESERVATION
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div>EMBER © 2026</div>
+
+    <span>CAIRO · EGYPT</span>
+
+    <span>MODERN FIRE KITCHEN</span>
+
+</footer>
+
+
+<script>
+
+/* ================= MOUSE PARALLAX ================= */
+
+const visual = document.getElementById("visual");
+const heroCopy = document.querySelector(".hero-copy");
+
+window.addEventListener("mousemove", (e) => {
+
+    const x = (e.clientX / window.innerWidth - 0.5);
+    const y = (e.clientY / window.innerHeight - 0.5);
+
+    visual.style.transform =
+        `translate(${x * 12}px, ${y * 8}px)`;
+
+    heroCopy.style.transform =
+        `translate(${x * -3}px, ${y * -2}px)`;
+});
+
+
+/* ================= SCROLL REVEAL ================= */
+
+const elements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+            observer.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:0.12
+});
+
+
+elements.forEach(el => observer.observe(el));
+
+</script>
+
+</body>
+</html>

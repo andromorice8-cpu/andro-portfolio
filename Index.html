@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA — Digital Studio</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+:root{
+  --bg:#030812;
+  --card:#081827;
+  --cyan:#27e6cf;
+  --blue:#438cff;
+  --white:#f5f8ff;
+  --muted:#8b9caf;
+  --line:rgba(255,255,255,.09);
+}
+
+body{
+  background:
+    radial-gradient(circle at 80% 10%,rgba(39,230,207,.07),transparent 25%),
+    var(--bg);
+  color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.13;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:55px 55px;
+}
+
+/* NAV */
+
+nav{
+  position:fixed;
+  z-index:999;
+  top:16px;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(1150px,92%);
+  height:68px;
+  padding:0 22px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  background:rgba(5,13,25,.84);
+  backdrop-filter:blur(20px);
+
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:4px;
+}
+
+.logo span{
+  color:var(--cyan);
+}
+
+.links{
+  display:flex;
+  gap:30px;
+}
+
+.links a{
+  color:#9eafc1;
+  text-decoration:none;
+  font-size:14px;
+  transition:.3s;
+}
+
+.links a:hover{
+  color:var(--cyan);
+}
+
+.nav-button{
+  text-decoration:none;
+  color:#02100e;
+  background:var(--cyan);
+  padding:12px 19px;
+  border-radius:11px;
+  font-weight:bold;
+  font-size:13px;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  width:min(1180px,92%);
+  margin:auto;
+
+  padding-top:150px;
+  padding-bottom:80px;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:40px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+
+  padding:9px 14px;
+
+  border:1px solid rgba(39,230,207,.2);
+  background:rgba(39,230,207,.06);
+
+  color:var(--cyan);
+  border-radius:30px;
+
+  font-size:11px;
+  letter-spacing:1.5px;
+  margin-bottom:25px;
+}
+
+.live-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 15px var(--cyan);
+}
+
+.hero h1{
+  font-size:clamp(52px,6vw,82px);
+  line-height:.98;
+  letter-spacing:-4px;
+}
+
+.hero h1 span{
+  background:linear-gradient(90deg,var(--cyan),#8afff3,var(--blue));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero-text p{
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.8;
+  max-width:580px;
+  margin:28px 0 34px;
+}
+
+.buttons{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:15px 23px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  transition:.3s;
+}
+
+.primary{
+  background:var(--cyan);
+  color:#03110f;
+}
+
+.primary:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 40px rgba(39,230,207,.25);
+}
+
+.secondary{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+  color:white;
+}
+
+.secondary:hover{
+  transform:translateY(-5px);
+}
+
+/* 3D */
+
+.scene{
+  height:500px;
+  position:relative;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  perspective:1000px;
+}
+
+.glow{
+  position:absolute;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:rgba(39,230,207,.14);
+  filter:blur(70px);
+}
+
+.cube{
+  width:190px;
+  height:190px;
+  position:relative;
+  transform-style:preserve-3d;
+  animation:cubeSpin 12s linear infinite;
+}
+
+.face{
+  position:absolute;
+  width:190px;
+  height:190px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:48px;
+  font-weight:bold;
+  color:var(--cyan);
+
+  background:linear-gradient(
+    135deg,
+    rgba(39,230,207,.13),
+    rgba(67,140,255,.04)
+  );
+
+  border:1px solid rgba(39,230,207,.4);
+}
+
+.front{transform:translateZ(95px)}
+.back{transform:rotateY(180deg) translateZ(95px)}
+.right{transform:rotateY(90deg) translateZ(95px)}
+.left{transform:rotateY(-90deg) translateZ(95px)}
+.top{transform:rotateX(90deg) translateZ(95px)}
+.bottom{transform:rotateX(-90deg) translateZ(95px)}
+
+.orbit{
+  position:absolute;
+  width:360px;
+  height:360px;
+  border:1px solid rgba(39,230,207,.25);
+  border-radius:50%;
+  transform:rotateX(65deg);
+  animation:orbit 8s linear infinite;
+}
+
+.orbit.two{
+  width:310px;
+  height:310px;
+  border-color:rgba(67,140,255,.22);
+  transform:rotateY(65deg);
+  animation-direction:reverse;
+}
+
+@keyframes cubeSpin{
+  from{transform:rotateX(-12deg) rotateY(0deg)}
+  to{transform:rotateX(-12deg) rotateY(360deg)}
+}
+
+@keyframes orbit{
+  from{transform:rotateX(65deg) rotateZ(0deg)}
+  to{transform:rotateX(65deg) rotateZ(360deg)}
+}
+
+/* TRUST */
+
+.trust{
+  width:min(1100px,92%);
+  margin:auto;
+  padding:25px 0 100px;
+  text-align:center;
+}
+
+.trust-title{
+  color:#596c81;
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:28px;
+}
+
+.trust-list{
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:25px;
+  color:#687c91;
+  font-size:17px;
+  font-weight:bold;
+}
+
+/* SECTIONS */
+
+.section{
+  width:min(1100px,92%);
+  margin:auto;
+  padding:110px 0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:40px;
+  margin-bottom:45px;
+}
+
+.label{
+  color:var(--cyan);
+  font-size:11px;
+  letter-spacing:3px;
+  font-weight:bold;
+  margin-bottom:13px;
+}
+
+.section h2{
+  font-size:46px;
+  letter-spacing:-2px;
+}
+
+.section-head p{
+  max-width:430px;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* SERVICES */
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  min-height:290px;
+  padding:30px;
+
+  background:linear-gradient(
+    145deg,
+    rgba(12,30,49,.95),
+    rgba(6,17,30,.9)
+  );
+
+  border:1px solid var(--line);
+  border-radius:22px;
+
+  transition:.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+  border-color:rgba(39,230,207,.35);
+}
+
+.icon{
+  width:55px;
+  height:55px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:15px;
+
+  color:var(--cyan);
+  font-size:24px;
+
+  background:rgba(39,230,207,.07);
+  border:1px solid rgba(39,230,207,.15);
+
+  margin-bottom:55px;
+}
+
+.card h3{
+  font-size:21px;
+  margin-bottom:13px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.stat{
+  text-align:center;
+  padding:38px 15px;
+  border-right:1px solid var(--line);
+}
+
+.stat:last-child{
+  border-right:0;
+}
+
+.stat strong{
+  display:block;
+  font-size:38px;
+  margin-bottom:9px;
+}
+
+.stat span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* PROJECTS */
+
+.projects{
+  display:grid;
+  grid-template-columns:1.35fr .85fr;
+  gap:20px;
+}
+
+/* PROJECT CARD */
+
+.project{
+  min-height:440px;
+
+  border-radius:24px;
+  border:1px solid var(--line);
+
+  position:relative;
+  overflow:hidden;
+
+  padding:28px;
+
+  background:#081827;
+
+  transition:.45s;
+}
+
+.project:hover{
+  transform:translateY(-9px);
+  border-color:rgba(39,230,207,.4);
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+.project-tag{
+  position:relative;
+  z-index:5;
+
+  color:var(--cyan);
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.project-title{
+  position:absolute;
+  left:28px;
+  bottom:28px;
+  z-index:5;
+}
+
+.project-title h3{
+  font-size:28px;
+  margin-bottom:7px;
+}
+
+.project-title p{
+  color:#91a3b6;
+  font-size:13px;
+}
+
+/* WEBSITE MOCKUP */
+
+.browser{
+  position:absolute;
+
+  left:8%;
+  right:8%;
+  top:80px;
+  bottom:80px;
+
+  background:#f4f7fb;
+
+  border-radius:15px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.4);
+
+  transform:perspective(900px) rotateX(4deg);
+
+  transition:.5s;
+}
+
+.project:hover .browser{
+  transform:perspective(900px) rotateX(0deg) translateY(-8px);
+}
+
+/* BROWSER BAR */
+
+.browser-top{
+  height:28px;
+  background:#dfe5ec;
+
+  display:flex;
+  align-items:center;
+
+  padding-left:12px;
+  gap:6px;
+}
+
+.browser-top i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#8995a4;
+}
+
+/* FINANCE MOCKUP */
+
+.finance{
+  height:100%;
+  color:#101827;
+  padding:20px;
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(39,230,207,.18),
+      transparent 25%
+    ),
+    #f8fafc;
+}
+
+.finance-nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:10px;
+  font-weight:bold;
+}
+
+.finance-logo{
+  color:#087d72;
+  font-size:15px;
+}
+
+.finance-button{
+  background:#111827;
+  color:white;
+  padding:6px 10px;
+  border-radius:5px;
+}
+
+.finance-main{
+  margin-top:28px;
+}
+
+.finance-main small{
+  color:#6b7280;
+  font-size:9px;
+}
+
+.finance-main h4{
+  font-size:27px;
+  margin:6px 0;
+}
+
+.finance-main p{
+  font-size:9px;
+  color:#687385;
+}
+
+.finance-cards{
+  display:grid;
+  grid-template-columns:1.4fr .8fr;
+  gap:10px;
+  margin-top:22px;
+}
+
+.money-card{
+  min-height:85px;
+  border-radius:10px;
+  padding:12px;
+  background:#101827;
+  color:white;
+}
+
+.money-card span{
+  font-size:8px;
+  color:#9ca8b7;
+}
+
+.money-card strong{
+  display:block;
+  font-size:17px;
+  margin-top:10px;
+}
+
+.chart{
+  min-height:85px;
+  border-radius:10px;
+  background:white;
+  padding:12px;
+  position:relative;
+}
+
+.chart-line{
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:25px;
+  height:35px;
+
+  border-bottom:2px solid #27bfae;
+
+  transform:skewY(-15deg);
+}
+
+/* VERTEX MOCKUP */
+
+.vertex{
+  height:100%;
+  padding:18px;
+  color:white;
+
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(67,140,255,.3),
+      transparent 30%
+    ),
+    #080d19;
+}
+
+.vertex-nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:9px;
+}
+
+.vertex-logo{
+  font-size:14px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+.vertex-menu{
+  display:flex;
+  gap:8px;
+  color:#a9b5c5;
+}
+
+.vertex-hero{
+  margin-top:30px;
+}
+
+.vertex-hero small{
+  color:#6e9fff;
+  font-size:8px;
+  letter-spacing:1px;
+}
+
+.vertex-hero h4{
+  font-size:25px;
+  line-height:1;
+  margin-top:8px;
+}
+
+.vertex-shape{
+  margin-top:20px;
+  height:90px;
+
+  border:1px solid rgba(67,140,255,.3);
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(67,140,255,.2),
+      rgba(39,230,207,.04)
+    );
+
+  position:relative;
+  overflow:hidden;
+}
+
+.vertex-shape:before{
+  content:"";
+  position:absolute;
+
+  width:90px;
+  height:90px;
+
+  border-radius:50%;
+
+  background:rgba(67,140,255,.5);
+
+  filter:blur(20px);
+
+  right:25px;
+  top:10px;
+}
+
+/* TESTIMONIAL */
+
+.testimonial{
+  padding:60px 35px;
+
+  text-align:center;
+
+  background:
+    radial-gradient(
+      circle at 50% 0,
+      rgba(39,230,207,.1),
+      transparent 45%
+    ),
+    var(--card);
+
+  border:1px solid var(--line);
+  border-radius:25px;
+}
+
+.testimonial-text{
+  max-width:800px;
+  margin:auto;
+
+  font-size:25px;
+  line-height:1.6;
+}
+
+.testimonial small{
+  display:block;
+  margin-top:25px;
+  color:var(--cyan);
+}
+
+/* CTA */
+
+.cta{
+  width:min(1100px,92%);
+  margin:60px auto 100px;
+
+  padding:80px 30px;
+
+  text-align:center;
+
+  border-radius:28px;
+
+  border:1px solid rgba(39,230,207,.2);
+
+  background:
+    radial-gradient(
+      circle at 50% 0,
+      rgba(39,230,207,.17),
+      transparent 45%
+    ),
+    #081827;
+}
+
+.cta h2{
+  font-size:48px;
+  letter-spacing:-2px;
+  margin-bottom:15px;
+}
+
+.cta p{
+  color:var(--muted);
+  margin-bottom:30px;
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--line);
+
+  padding:35px 6%;
+
+  display:flex;
+  justify-content:space-between;
+
+  color:#63768b;
+  font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  nav{
+    height:62px;
+  }
+
+  .links{
+    display:none;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+    padding-top:135px;
+  }
+
+  .hero-text p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .scene{
+    height:410px;
+  }
+
+  .services{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stat:nth-child(2){
+    border-right:0;
+  }
+
+  .section-head{
+    display:block;
+  }
+
+  .section-head p{
+    margin-top:20px;
+  }
+
+  .projects{
+    grid-template-columns:1fr;
+  }
+
+  .project{
+    min-height:400px;
+  }
+
+  .cta h2{
+    font-size:36px;
+  }
+
+  footer{
+    display:block;
+    text-align:center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+  <div class="logo">
+    NO<span>V</span>A
+  </div>
+
+  <div class="links">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+  </div>
+
+  <a href="#contact" class="nav-button">
+    Let's Talk
+  </a>
+
+</nav>
+
+
+<header class="hero">
+
+  <div class="hero-text">
+
+    <div class="badge">
+      <span class="live-dot"></span>
+      DIGITAL STUDIO • AVAILABLE NOW
+    </div>
+
+    <h1>
+      Digital ideas.
+      <br>
+      <span>Built beautifully.</span>
+    </h1>
+
+    <p>
+      We design and build premium digital experiences
+      for brands, startups and businesses that want
+      to stand out online.
+    </p>
+
+    <div class="buttons">
+
+      <a href="#work" class="btn primary">
+        Explore our work →
+      </a>
+
+      <a href="#services" class="btn secondary">
+        View services
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="scene">
+
+    <div class="glow"></div>
+
+    <div class="orbit"></div>
+    <div class="orbit two"></div>
+
+    <div class="cube">
+
+      <div class="face front">N</div>
+      <div class="face back">✦</div>
+      <div class="face right">◆</div>
+      <div class="face left">N</div>
+      <div class="face top">+</div>
+      <div class="face bottom">×</div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<div class="trust">
+
+  <div class="trust-title">
+    CRAFTED FOR MODERN DIGITAL BRANDS
+  </div>
+
+  <div class="trust-list">
+    <span>STARTUPS</span>
+    <span>TECH</span>
+    <span>CREATIVE</span>
+    <span>BUSINESS</span>
+    <span>FUTURE</span>
+  </div>
+
+</div>
+
+
+<section class="section" id="services">
+
+  <div class="section-head">
+
+    <div>
+      <div class="label">WHAT WE DO</div>
+      <h2>Built to stand out.</h2>
+    </div>
+
+    <p>
+      Strategy, design and development combined
+      into one polished digital experience.
+    </p>
+
+  </div>
+
+
+  <div class="services">
+
+    <div class="card">
+
+      <div class="icon">⌘</div>
+
+      <h3>Web Development</h3>
+
+      <p>
+        Fast, responsive and modern websites
+        designed to work beautifully on every screen.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">✦</div>
+
+      <h3>UI / UX Design</h3>
+
+      <p>
+        Clean interfaces focused on usability,
+        visual quality and memorable experiences.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">↗</div>
+
+      <h3>Digital Strategy</h3>
+
+      <p>
+        Digital solutions that help businesses
+        communicate, attract customers and grow.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="about">
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong>24+</strong>
+      <span>Projects</span>
+    </div>
+
+    <div class="stat">
+      <strong>98%</strong>
+      <span>Satisfaction</span>
+    </div>
+
+    <div class="stat">
+      <strong>12</strong>
+      <span>Industries</span>
+    </div>
+
+    <div class="stat">
+      <strong>4.9</strong>
+      <span>Average rating</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section" id="work">
+
+  <div class="section-head">
+
+    <div>
+
+      <div class="label">
+        SELECTED WORK
+      </div>
+
+      <h2>
+        From idea to reality.
+      </h2>
+
+    </div>
+
+    <p>
+      Concept projects created to demonstrate
+      premium web design and digital experiences.
+    </p>
+
+  </div>
+
+
+  <div class="projects">
+
+
+    <!-- PROJECT 1 -->
+
+    <div class="project">
+
+      <div class="project-tag">
+        01 / DIGITAL PLATFORM
+      </div>
+
+      <div class="browser">
+
+        <div class="browser-top">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="finance">
+
+          <div class="finance-nav">
+
+            <div class="finance-logo">
+              FINOVA
+            </div>
+
+            <div class="finance-button">
+              Dashboard
+            </div>
+
+          </div>
+
+
+          <div class="finance-main">
+
+            <small>
+              YOUR FINANCIAL FUTURE
+            </small>
+
+            <h4>
+              Make money smarter.
+            </h4>
+
+            <p>
+              A modern financial experience
+              built for the next generation.
+            </p>
+
+          </div>
+
+
+          <div class="finance-cards">
+
+            <div class="money-card">
+
+              <span>
+                TOTAL BALANCE
+              </span>
+
+              <strong>
+                $84,250
+              </strong>
+
+            </div>
+
+            <div class="chart">
+
+              <div class="chart-line"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-title">
+
+        <h3>
+          Future Finance
+        </h3>
+
+        <p>
+          Fintech • Web Experience
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROJECT 2 -->
+
+    <div class="project">
+
+      <div class="project-tag">
+        02 / CREATIVE BRAND
+      </div>
+
+      <div class="browser">
+
+        <div class="browser-top">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="vertex">
+
+          <div class="vertex-nav">
+
+            <div class="vertex-logo">
+              VERTEX
+            </div>
+
+            <div class="vertex-menu">
+              WORK&nbsp;&nbsp; ABOUT
+            </div>
+
+          </div>
+
+
+          <div class="vertex-hero">
+
+            <small>
+              CREATIVE DIGITAL STUDIO
+            </small>
+
+            <h4>
+              Think<br>
+              beyond.
+            </h4>
+
+            <div class="vertex-shape"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="project-title">
+
+        <h3>
+          Vertex
+        </h3>
+
+        <p>
+          Brand • UI Design
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="testimonial">
+
+    <div class="testimonial-text">
+      “Great digital design isn't just about
+      looking good. It's about creating an
+      experience people remember.”
+    </div>
+
+    <small>
+      — NOVA CREATIVE PRINCIPLE
+    </small>
+
+  </div>
+
+</section>
+
+
+<section class="cta" id="contact">
+
+  <div class="label">
+    HAVE A PROJECT IN MIND?
+  </div>
+
+  <h2>
+    Let's build something great.
+  </h2>
+
+  <p>
+    Have an idea? Turn it into a professional
+    digital experience.
+  </p>
+
+  <a href="mailto:hello@nova.example" class="btn primary">
+    Start a project →
+  </a>
+
+</section>
+
+
+<footer>
+
+  <div>
+    © 2026 NOVA Studio
+  </div>
+
+  <div>
+    Web • Design • Digital
+  </div>
+
+</footer>
+
+</body>
+</html>

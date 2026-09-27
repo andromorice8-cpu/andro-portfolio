@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FOLD — Fashion Store</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f4f1eb;
+    color:#111;
+    font-family:"DM Sans",sans-serif;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* NAV */
+
+nav{
+    height:78px;
+    padding:0 5vw;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #d8d4cc;
+    background:#f4f1eb;
+}
+
+.logo{
+    font-family:"Space Grotesk";
+    font-size:27px;
+    font-weight:700;
+    letter-spacing:-2px;
+}
+
+.logo span{
+    color:#d84d32;
+}
+
+.navlinks{
+    display:flex;
+    gap:35px;
+}
+
+.navlinks a{
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.navlinks a:hover{
+    color:#d84d32;
+}
+
+.cart{
+    border:1px solid #111;
+    padding:11px 18px;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+/* HERO */
+
+.hero{
+    min-height:calc(100vh - 78px);
+    padding:5vw;
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:5vw;
+    align-items:center;
+}
+
+.heroText small{
+    color:#d84d32;
+    font-size:10px;
+    letter-spacing:4px;
+}
+
+.heroText h1{
+    font-family:"Space Grotesk";
+    font-size:clamp(70px,10vw,150px);
+    line-height:.78;
+    letter-spacing:-9px;
+    margin-top:25px;
+}
+
+.heroText h1 span{
+    color:transparent;
+    -webkit-text-stroke:1.5px #111;
+}
+
+.heroText p{
+    max-width:400px;
+    color:#77736c;
+    line-height:1.7;
+    font-size:14px;
+    margin-top:35px;
+}
+
+.heroBtn{
+    display:inline-block;
+    margin-top:30px;
+    background:#111;
+    color:#fff;
+    padding:16px 25px;
+    font-size:10px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.heroBtn:hover{
+    background:#d84d32;
+}
+
+/* HERO IMAGE */
+
+.heroImage{
+    height:650px;
+    position:relative;
+    overflow:hidden;
+}
+
+.heroImage img{
+    transition:transform .7s ease;
+}
+
+.heroImage:hover img{
+    transform:scale(1.04);
+}
+
+.imageTag{
+    position:absolute;
+    left:25px;
+    bottom:25px;
+    background:#f4f1eb;
+    padding:15px 20px;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+/* INTRO */
+
+.intro{
+    background:#111;
+    color:#fff;
+    padding:100px 5vw;
+    display:flex;
+    justify-content:space-between;
+    gap:50px;
+}
+
+.intro h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(45px,7vw,95px);
+    line-height:.85;
+    letter-spacing:-6px;
+}
+
+.intro p{
+    max-width:360px;
+    color:#8d8a84;
+    line-height:1.8;
+    font-size:13px;
+}
+
+/* PRODUCTS */
+
+.products{
+    padding:120px 5vw;
+}
+
+.sectionHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:45px;
+}
+
+.sectionHead h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(50px,7vw,95px);
+    line-height:.8;
+    letter-spacing:-6px;
+}
+
+.sectionHead p{
+    color:#777;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.productGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.product{
+    position:relative;
+}
+
+.productImage{
+    height:500px;
+    background:#dedbd3;
+    overflow:hidden;
+}
+
+.productImage img{
+    transition:.6s ease;
+}
+
+.product:hover .productImage img{
+    transform:scale(1.06);
+}
+
+.productInfo{
+    padding:17px 3px;
+}
+
+.productInfo h3{
+    font-family:"Space Grotesk";
+    font-size:18px;
+}
+
+.productInfo p{
+    color:#777;
+    font-size:11px;
+    margin-top:6px;
+}
+
+.price{
+    float:right;
+    margin-top:-27px;
+    font-size:14px;
+}
+
+.tag{
+    position:absolute;
+    top:15px;
+    left:15px;
+    background:#111;
+    color:white;
+    padding:8px 11px;
+    font-size:8px;
+    letter-spacing:2px;
+    z-index:2;
+}
+
+/* LOOK */
+
+.look{
+    background:#d84d32;
+    color:white;
+    padding:120px 5vw;
+}
+
+.lookHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:50px;
+}
+
+.lookHead h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(55px,8vw,110px);
+    line-height:.8;
+    letter-spacing:-7px;
+}
+
+.lookHead p{
+    max-width:300px;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.lookGrid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:18px;
+}
+
+.lookLarge{
+    height:650px;
+}
+
+.lookSmall{
+    height:650px;
+    display:grid;
+    grid-template-rows:1fr 1fr;
+    gap:18px;
+}
+
+.lookSmall div{
+    overflow:hidden;
+}
+
+/* ABOUT */
+
+.about{
+    padding:130px 5vw;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8vw;
+    align-items:center;
+}
+
+.aboutImage{
+    height:600px;
+    overflow:hidden;
+}
+
+.aboutText small{
+    color:#d84d32;
+    letter-spacing:4px;
+    font-size:10px;
+}
+
+.aboutText h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(50px,6vw,85px);
+    line-height:.85;
+    letter-spacing:-5px;
+    margin-top:25px;
+}
+
+.aboutText p{
+    max-width:430px;
+    color:#777;
+    line-height:1.9;
+    font-size:14px;
+    margin-top:30px;
+}
+
+/* NEWSLETTER */
+
+.newsletter{
+    background:#e2ded5;
+    padding:100px 5vw;
+    text-align:center;
+}
+
+.newsletter small{
+    color:#d84d32;
+    letter-spacing:4px;
+    font-size:10px;
+}
+
+.newsletter h2{
+    font-family:"Space Grotesk";
+    font-size:clamp(50px,8vw,110px);
+    line-height:.8;
+    letter-spacing:-7px;
+    margin-top:25px;
+}
+
+.newsletter a{
+    display:inline-block;
+    background:#111;
+    color:#fff;
+    padding:17px 28px;
+    margin-top:40px;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    color:#eee;
+    padding:35px 5vw;
+    display:flex;
+    justify-content:space-between;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+footer span{
+    color:#666;
+}
+
+/* REVEAL */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:.8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .navlinks{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding:60px 6vw;
+    }
+
+    .heroText h1{
+        font-size:75px;
+    }
+
+    .heroImage{
+        height:520px;
+    }
+
+    .intro{
+        flex-direction:column;
+    }
+
+    .productGrid{
+        grid-template-columns:1fr;
+    }
+
+    .productImage{
+        height:520px;
+    }
+
+    .lookGrid{
+        grid-template-columns:1fr;
+    }
+
+    .lookLarge{
+        height:550px;
+    }
+
+    .lookSmall{
+        height:700px;
+    }
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    .aboutImage{
+        height:500px;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+
+@media(max-width:500px){
+
+    .heroText h1{
+        font-size:62px;
+        letter-spacing:-5px;
+    }
+
+    .sectionHead,
+    .lookHead{
+        display:block;
+    }
+
+    .sectionHead p,
+    .lookHead p{
+        margin-top:25px;
+    }
+
+    .newsletter h2{
+        font-size:60px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">
+        FOLD<span>.</span>
+    </div>
+
+    <div class="navlinks">
+        <a href="#shop">SHOP</a>
+        <a href="#looks">LOOKS</a>
+        <a href="#about">ABOUT</a>
+    </div>
+
+    <a href="#shop" class="cart">
+        BAG / 00
+    </a>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="heroText">
+
+        <small>
+            NEW COLLECTION / 2026
+        </small>
+
+        <h1>
+            WEAR<br>
+            <span>THE</span><br>
+            MOMENT.
+        </h1>
+
+        <p>
+            Modern essentials designed for everyday life.
+            Clean silhouettes, relaxed fits and pieces
+            made to stay in your wardrobe.
+        </p>
+
+        <a href="#shop" class="heroBtn">
+            SHOP COLLECTION
+        </a>
+
+    </div>
+
+
+    <div class="heroImage">
+
+        <img
+        src="https://images.pexels.com/photos/36510904/pexels-photo-36510904.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        alt="Fashion model wearing streetwear">
+
+        <div class="imageTag">
+            FOLD / NEW SEASON
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="intro reveal">
+
+    <h2>
+        CLOTHES<br>
+        FOR REAL<br>
+        LIFE.
+    </h2>
+
+    <p>
+        We believe good clothing should feel effortless.
+        That's why every FOLD collection focuses on
+        comfortable materials, clean shapes and a style
+        that doesn't need to shout.
+    </p>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="products" id="shop">
+
+    <div class="sectionHead">
+
+        <h2>
+            NEW<br>
+            DROP.
+        </h2>
+
+        <p>
+            03 / SELECTED PIECES
+        </p>
+
+    </div>
+
+
+    <div class="productGrid">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product reveal">
+
+            <div class="tag">
+                NEW
+            </div>
+
+            <div class="productImage">
+
+                <img
+                src="https://images.pexels.com/photos/28758239/pexels-photo-28758239.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                alt="Oversized streetwear outfit">
+
+            </div>
+
+            <div class="productInfo">
+
+                <h3>
+                    Oversized Essential
+                </h3>
+
+                <p>
+                    Relaxed fit / Heavy cotton
+                </p>
+
+                <div class="price">
+                    $48
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product reveal">
+
+            <div class="tag">
+                BESTSELLER
+            </div>
+
+            <div class="productImage">
+
+                <img
+                src="https://images.pexels.com/photos/19805883/pexels-photo-19805883.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                alt="Cream hoodie outfit">
+
+            </div>
+
+            <div class="productInfo">
+
+                <h3>
+                    Studio Hoodie
+                </h3>
+
+                <p>
+                    Soft fleece / Relaxed fit
+                </p>
+
+                <div class="price">
+                    $72
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product reveal">
+
+            <div class="productImage">
+
+                <img
+                src="https://images.pexels.com/photos/28870062/pexels-photo-28870062.jpeg?auto=compress&cs=tinysrgb&w=1000"
+                alt="Modern streetwear clothing">
+
+            </div>
+
+            <div class="productInfo">
+
+                <h3>
+                    Graphic Tee
+                </h3>
+
+                <p>
+                    Premium cotton / Oversized
+                </p>
+
+                <div class="price">
+                    $42
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LOOKS -->
+
+<section class="look" id="looks">
+
+    <div class="lookHead">
+
+        <h2>
+            SHOP<br>
+            THE LOOK.
+        </h2>
+
+        <p>
+            One outfit. Different pieces.
+            Find the combination that feels
+            like you.
+        </p>
+
+    </div>
+
+
+    <div class="lookGrid">
+
+        <div class="lookLarge">
+
+            <img
+            src="https://images.pexels.com/photos/29787237/pexels-photo-29787237.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            alt="Modern fashion outfit">
+
+        </div>
+
+
+        <div class="lookSmall">
+
+            <div>
+
+                <img
+                src="https://images.pexels.com/photos/15914119/pexels-photo-15914119.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Black fashion outfit">
+
+            </div>
+
+            <div>
+
+                <img
+                src="https://images.pexels.com/photos/6311320/pexels-photo-6311320.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Streetwear hoodies">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <div class="aboutImage reveal">
+
+        <img
+        src="https://images.pexels.com/photos/28701965/pexels-photo-28701965.jpeg?auto=compress&cs=tinysrgb&w=1100"
+        alt="Streetwear fashion">
+
+    </div>
+
+
+    <div class="aboutText reveal">
+
+        <small>
+            ABOUT FOLD
+        </small>
+
+        <h2>
+            LESS<br>
+            NOISE.<br>
+            MORE<br>
+            STYLE.
+        </h2>
+
+        <p>
+            FOLD is an independent clothing concept built
+            around modern streetwear and everyday essentials.
+            We care about the fit, the fabric and the feeling
+            you get when you put something on.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+
+<section class="newsletter">
+
+    <small>
+        STAY IN THE LOOP
+    </small>
+
+    <h2>
+        THE NEXT<br>
+        DROP IS CLOSE.
+    </h2>
+
+    <a href="#shop">
+        DISCOVER FOLD
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div>
+        FOLD © 2026
+    </div>
+
+    <span>
+        CAIRO / EGYPT
+    </span>
+
+    <span>
+        WEAR WHAT FEELS RIGHT
+    </span>
+
+</footer>
+
+
+<script>
+
+/* SCROLL ANIMATION */
+
+const elements =
+document.querySelectorAll(".reveal");
+
+const observer =
+new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+            observer.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:.12
+});
+
+elements.forEach(element=>{
+    observer.observe(element);
+});
+
+</script>
+
+</body>
+</html>

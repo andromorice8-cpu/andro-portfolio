@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FORMA — Architecture Studio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;500;600&family=Playfair+Display:ital,wght@0,500;0,600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#e9e5dc;
+    color:#171714;
+    font-family:"DM Sans",sans-serif;
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* ================= NAV ================= */
+
+nav{
+    height:82px;
+    padding:0 5vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #c9c4ba;
+    background:#e9e5dc;
+}
+
+.logo{
+    font-size:22px;
+    letter-spacing:7px;
+    font-weight:600;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+}
+
+.nav-links a{
+    font-size:9px;
+    letter-spacing:2px;
+    color:#5d5a54;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#171714;
+}
+
+.contact{
+    border:1px solid #171714;
+    padding:11px 17px;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:calc(100vh - 82px);
+    padding:5vw;
+    display:grid;
+    grid-template-columns:.75fr 1.25fr;
+    gap:5vw;
+    align-items:center;
+}
+
+.hero-copy{
+    position:relative;
+    z-index:2;
+}
+
+.eyebrow{
+    font-size:9px;
+    letter-spacing:4px;
+    color:#77736b;
+    margin-bottom:28px;
+}
+
+.hero h1{
+    font-family:"Playfair Display",serif;
+    font-weight:500;
+    font-size:clamp(70px,10vw,150px);
+    line-height:.78;
+    letter-spacing:-7px;
+}
+
+.hero h1 em{
+    font-style:italic;
+}
+
+.hero-text{
+    max-width:390px;
+    color:#716e67;
+    font-size:13px;
+    line-height:1.8;
+    margin-top:38px;
+}
+
+.hero-link{
+    display:inline-block;
+    margin-top:30px;
+    border-bottom:1px solid #171714;
+    padding-bottom:6px;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* HERO IMAGE */
+
+.hero-image{
+    height:650px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-image img{
+    transition:transform .8s ease;
+}
+
+.hero-image:hover img{
+    transform:scale(1.035);
+}
+
+.hero-caption{
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    background:#e9e5dc;
+    padding:12px 15px;
+    font-size:8px;
+    letter-spacing:2px;
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+    background:#171714;
+    color:#e9e5dc;
+    padding:130px 7vw;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10vw;
+}
+
+.intro-label{
+    color:#8c887e;
+    font-size:9px;
+    letter-spacing:4px;
+}
+
+.intro h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(48px,6vw,85px);
+    line-height:.9;
+    font-weight:500;
+}
+
+.intro h2 em{
+    color:#aaa69b;
+}
+
+.intro p{
+    color:#8e8b82;
+    max-width:500px;
+    line-height:1.9;
+    font-size:14px;
+}
+
+/* ================= PROJECTS ================= */
+
+.projects{
+    padding:130px 5vw;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:65px;
+}
+
+.section-title h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(55px,8vw,110px);
+    font-weight:500;
+    line-height:.8;
+    letter-spacing:-6px;
+}
+
+.section-title span{
+    font-size:9px;
+    letter-spacing:3px;
+    color:#77736b;
+}
+
+/* project 01 */
+
+.project-large{
+    display:grid;
+    grid-template-columns:1.5fr .5fr;
+    gap:18px;
+    margin-bottom:100px;
+}
+
+.project-image{
+    height:650px;
+    overflow:hidden;
+    position:relative;
+}
+
+.project-image img{
+    transition:.7s;
+}
+
+.project-image:hover img{
+    transform:scale(1.035);
+}
+
+.project-info{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding-bottom:5px;
+}
+
+.project-number{
+    font-size:9px;
+    letter-spacing:3px;
+    color:#77736b;
+    margin-bottom:15px;
+}
+
+.project-info h3{
+    font-family:"Playfair Display",serif;
+    font-size:42px;
+    font-weight:500;
+    line-height:.95;
+}
+
+.project-info p{
+    color:#77736b;
+    font-size:11px;
+    line-height:1.7;
+    margin-top:18px;
+}
+
+.project-info a{
+    margin-top:25px;
+    font-size:9px;
+    letter-spacing:2px;
+    border-bottom:1px solid #171714;
+    width:max-content;
+    padding-bottom:5px;
+}
+
+/* project grid */
+
+.project-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.project-card{
+    position:relative;
+}
+
+.project-card-image{
+    height:600px;
+    overflow:hidden;
+}
+
+.project-card-image img{
+    transition:.7s;
+}
+
+.project-card:hover img{
+    transform:scale(1.04);
+}
+
+.project-card-info{
+    padding:18px 0;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #c8c3b9;
+}
+
+.project-card-info h3{
+    font-family:"Playfair Display",serif;
+    font-size:24px;
+    font-weight:500;
+}
+
+.project-card-info span{
+    font-size:9px;
+    color:#77736b;
+    letter-spacing:2px;
+}
+
+/* ================= NUMBERS ================= */
+
+.numbers{
+    background:#d2cec3;
+    padding:100px 5vw;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.number{
+    border-right:1px solid #aaa69c;
+    padding:15px 30px;
+}
+
+.number:first-child{
+    padding-left:0;
+}
+
+.number:last-child{
+    border-right:0;
+}
+
+.number strong{
+    display:block;
+    font-family:"Playfair Display",serif;
+    font-size:60px;
+    font-weight:500;
+}
+
+.number span{
+    color:#69665f;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* ================= PHILOSOPHY ================= */
+
+.philosophy{
+    padding:140px 7vw;
+    display:grid;
+    grid-template-columns:.7fr 1.3fr;
+    gap:8vw;
+}
+
+.philosophy small{
+    font-size:9px;
+    letter-spacing:4px;
+    color:#77736b;
+}
+
+.philosophy h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(50px,7vw,100px);
+    font-weight:500;
+    line-height:.85;
+    letter-spacing:-5px;
+}
+
+.philosophy p{
+    max-width:600px;
+    font-size:18px;
+    line-height:1.9;
+    color:#6d6a63;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-section{
+    background:#171714;
+    color:#e9e5dc;
+    padding:140px 5vw;
+    text-align:center;
+}
+
+.contact-section small{
+    color:#8e8b82;
+    font-size:9px;
+    letter-spacing:4px;
+}
+
+.contact-section h2{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(60px,10vw,145px);
+    font-weight:500;
+    line-height:.78;
+    letter-spacing:-7px;
+    margin-top:25px;
+}
+
+.contact-section h2 em{
+    color:#aaa69b;
+}
+
+.contact-button{
+    display:inline-block;
+    margin-top:45px;
+    background:#e9e5dc;
+    color:#171714;
+    padding:17px 28px;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#171714;
+    color:#e9e5dc;
+    border-top:1px solid #34342f;
+    padding:32px 5vw;
+    display:flex;
+    justify-content:space-between;
+    font-size:8px;
+    letter-spacing:2px;
+}
+
+footer span{
+    color:#77736b;
+}
+
+/* ================= REVEAL ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:.8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        grid-template-columns:1fr;
+        padding:60px 6vw;
+    }
+
+    .hero h1{
+        font-size:75px;
+        letter-spacing:-5px;
+    }
+
+    .hero-image{
+        height:520px;
+    }
+
+    .intro{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .project-large{
+        grid-template-columns:1fr;
+    }
+
+    .project-image{
+        height:500px;
+    }
+
+    .project-grid{
+        grid-template-columns:1fr;
+    }
+
+    .project-card-image{
+        height:500px;
+    }
+
+    .numbers{
+        grid-template-columns:1fr 1fr;
+        gap:30px 0;
+    }
+
+    .number{
+        border-right:0;
+    }
+
+    .number:first-child{
+        padding-left:0;
+    }
+
+    .philosophy{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+
+@media(max-width:500px){
+
+    .hero h1{
+        font-size:62px;
+    }
+
+    .section-title{
+        display:block;
+    }
+
+    .section-title span{
+        display:block;
+        margin-top:25px;
+    }
+
+    .numbers{
+        grid-template-columns:1fr;
+    }
+
+    .number{
+        padding-left:0;
+        border-bottom:1px solid #aaa69c;
+        padding-bottom:25px;
+    }
+
+    .contact-section h2{
+        font-size:65px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">
+        FORMA
+    </div>
+
+    <div class="nav-links">
+        <a href="#projects">PROJECTS</a>
+        <a href="#studio">STUDIO</a>
+        <a href="#contact">CONTACT</a>
+    </div>
+
+    <a href="#contact" class="contact">
+        START A PROJECT
+    </a>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-copy">
+
+        <div class="eyebrow">
+            ARCHITECTURE / INTERIORS / 2026
+        </div>
+
+        <h1>
+            SPACE<br>
+            <em>MATTERS.</em>
+        </h1>
+
+        <p class="hero-text">
+            FORMA is an architecture and interior design studio
+            creating quiet, thoughtful spaces shaped around
+            light, material and human experience.
+        </p>
+
+        <a href="#projects" class="hero-link">
+            VIEW SELECTED WORK →
+        </a>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+        src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1500&q=85"
+        alt="Modern luxury interior">
+
+        <div class="hero-caption">
+            RESIDENCE 01 / CAIRO
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTRO -->
+
+<section class="intro reveal" id="studio">
+
+    <div>
+
+        <div class="intro-label">
+            OUR APPROACH
+        </div>
+
+    </div>
+
+    <div>
+
+        <h2>
+            WE DESIGN<br>
+            <em>HOW SPACE</em><br>
+            FEELS.
+        </h2>
+
+        <p style="margin-top:35px;">
+            Architecture is more than form.
+            It is light in the morning, the sound of a room,
+            the material beneath your hand and the way people
+            move through a space.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section class="projects" id="projects">
+
+    <div class="section-title reveal">
+
+        <h2>
+            SELECTED<br>
+            WORK.
+        </h2>
+
+        <span>
+            2022 — 2026
+        </span>
+
+    </div>
+
+
+    <!-- PROJECT 01 -->
+
+    <div class="project-large reveal">
+
+        <div class="project-image">
+
+            <img
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1500&q=85"
+            alt="Luxury interior project">
+
+        </div>
+
+
+        <div class="project-info">
+
+            <div class="project-number">
+                01 / RESIDENTIAL
+            </div>
+
+            <h3>
+                House<br>
+                No. 08
+            </h3>
+
+            <p>
+                A private residence designed around
+                natural light, warm stone and open
+                transitions between interior and garden.
+            </p>
+
+            <a href="#">
+                VIEW PROJECT →
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROJECTS 02 / 03 -->
+
+    <div class="project-grid">
+
+        <div class="project-card reveal">
+
+            <div class="project-card-image">
+
+                <img
+                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85"
+                alt="Minimal interior">
+
+            </div>
+
+            <div class="project-card-info">
+
+                <h3>
+                    Quiet House
+                </h3>
+
+                <span>
+                    RESIDENTIAL / 2025
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="project-card reveal">
+
+            <div class="project-card-image">
+
+                <img
+                src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=85"
+                alt="Modern architecture interior">
+
+            </div>
+
+            <div class="project-card-info">
+
+                <h3>
+                    Concrete & Light
+                </h3>
+
+                <span>
+                    INTERIOR / 2024
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NUMBERS -->
+
+<section class="numbers reveal">
+
+    <div class="number">
+
+        <strong>42</strong>
+
+        <span>
+            COMPLETED PROJECTS
+        </span>
+
+    </div>
+
+
+    <div class="number">
+
+        <strong>11</strong>
+
+        <span>
+            YEARS OF PRACTICE
+        </span>
+
+    </div>
+
+
+    <div class="number">
+
+        <strong>08</strong>
+
+        <span>
+            COUNTRIES
+        </span>
+
+    </div>
+
+
+    <div class="number">
+
+        <strong>17</strong>
+
+        <span>
+            DESIGN AWARDS
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- PHILOSOPHY -->
+
+<section class="philosophy reveal">
+
+    <div>
+
+        <small>
+            DESIGN PHILOSOPHY
+        </small>
+
+    </div>
+
+    <div>
+
+        <h2>
+            LESS FORM.<br>
+            MORE <em>FEELING.</em>
+        </h2>
+
+        <p style="margin-top:35px;">
+            We believe the strongest spaces don't compete
+            for attention. They create an atmosphere that
+            stays with you.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact-section" id="contact">
+
+    <small>
+        HAVE A SPACE IN MIND?
+    </small>
+
+    <h2>
+        LET'S MAKE<br>
+        IT <em>REAL.</em>
+    </h2>
+
+    <a href="mailto:studio@forma.example" class="contact-button">
+        START A CONVERSATION
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div>
+        FORMA © 2026
+    </div>
+
+    <span>
+        CAIRO / EGYPT
+    </span>
+
+    <span>
+        ARCHITECTURE + INTERIORS
+    </span>
+
+</footer>
+
+
+<script>
+
+/* SCROLL REVEAL */
+
+const elements =
+document.querySelectorAll(".reveal");
+
+const observer =
+new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+            observer.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:.12
+});
+
+elements.forEach(element=>{
+    observer.observe(element);
+});
+
+</script>
+
+</body>
+</html>

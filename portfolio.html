@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ANDRO — Digital Designer</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#0d0e0c;
+    color:#f3f2ed;
+    font-family:"DM Sans",sans-serif;
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* NAV */
+
+nav{
+    height:82px;
+    padding:0 5vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #292b27;
+    position:relative;
+    z-index:10;
+}
+
+.logo{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:24px;
+    font-weight:700;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:#c9ff3d;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+}
+
+.nav-links a{
+    color:#888b83;
+    font-size:10px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#c9ff3d;
+}
+
+.contact-btn{
+    background:#c9ff3d;
+    color:#0d0e0c;
+    padding:12px 19px;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+/* HERO */
+
+.hero{
+    min-height:calc(100vh - 82px);
+    padding:7vw 5vw;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.hero-top{
+    color:#c9ff3d;
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:28px;
+}
+
+.hero h1{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(70px,12vw,180px);
+    line-height:.76;
+    letter-spacing:-11px;
+    max-width:1200px;
+}
+
+.hero h1 span{
+    color:transparent;
+    -webkit-text-stroke:1.5px #f3f2ed;
+}
+
+.hero-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-top:55px;
+}
+
+.hero-bottom p{
+    max-width:450px;
+    color:#858880;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.hero-arrow{
+    width:70px;
+    height:70px;
+    border:1px solid #444640;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    color:#c9ff3d;
+}
+
+/* INTRO */
+
+.intro{
+    background:#c9ff3d;
+    color:#0d0e0c;
+    padding:100px 5vw;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10vw;
+}
+
+.intro h2{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(50px,7vw,100px);
+    line-height:.8;
+    letter-spacing:-7px;
+}
+
+.intro p{
+    font-size:18px;
+    line-height:1.8;
+    max-width:500px;
+}
+
+/* WORK */
+
+.work{
+    padding:130px 5vw;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:60px;
+}
+
+.section-head h2{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(55px,8vw,110px);
+    line-height:.8;
+    letter-spacing:-7px;
+}
+
+.section-head span{
+    color:#777a73;
+    font-size:9px;
+    letter-spacing:3px;
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px 20px;
+}
+
+.project{
+    position:relative;
+    display:block;
+    cursor:pointer;
+}
+
+.project:nth-child(even){
+    margin-top:130px;
+}
+
+.project-image{
+    height:600px;
+    overflow:hidden;
+    position:relative;
+    background:#222;
+}
+
+.project-image img{
+    transition:.7s ease;
+}
+
+.project:hover .project-image img{
+    transform:scale(1.045);
+}
+
+.project-number{
+    position:absolute;
+    top:20px;
+    left:20px;
+    z-index:2;
+    background:#0d0e0c;
+    color:#c9ff3d;
+    padding:10px 13px;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.project-info{
+    padding:20px 2px;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #30322d;
+}
+
+.project-info h3{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:24px;
+    font-weight:500;
+}
+
+.project-info p{
+    color:#777a73;
+    font-size:10px;
+    margin-top:6px;
+}
+
+.view{
+    align-self:center;
+    color:#c9ff3d;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* ABOUT */
+
+.about{
+    background:#171915;
+    padding:130px 5vw;
+    display:grid;
+    grid-template-columns:.7fr 1.3fr;
+    gap:10vw;
+}
+
+.about-label{
+    color:#c9ff3d;
+    font-size:9px;
+    letter-spacing:4px;
+}
+
+.about h2{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(50px,7vw,100px);
+    line-height:.82;
+    letter-spacing:-7px;
+}
+
+.about h2 span{
+    color:#c9ff3d;
+}
+
+.about-text p{
+    color:#858880;
+    font-size:15px;
+    line-height:1.9;
+    max-width:570px;
+}
+
+.skills{
+    margin-top:45px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.skill{
+    border:1px solid #373a33;
+    padding:10px 14px;
+    font-size:9px;
+    letter-spacing:2px;
+    color:#aaa;
+}
+
+/* SERVICES */
+
+.services{
+    padding:130px 5vw;
+}
+
+.service{
+    display:grid;
+    grid-template-columns:100px 1fr auto;
+    align-items:center;
+    gap:30px;
+    min-height:120px;
+    border-top:1px solid #30322d;
+    transition:.35s;
+}
+
+.service:last-child{
+    border-bottom:1px solid #30322d;
+}
+
+.service:hover{
+    padding-left:18px;
+    color:#c9ff3d;
+}
+
+.service-num{
+    color:#777a73;
+    font-size:10px;
+}
+
+.service h3{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(25px,4vw,50px);
+    font-weight:500;
+    letter-spacing:-2px;
+}
+
+.service-arrow{
+    font-size:20px;
+}
+
+/* CTA */
+
+.cta{
+    background:#c9ff3d;
+    color:#0d0e0c;
+    text-align:center;
+    padding:150px 5vw;
+}
+
+.cta small{
+    font-size:10px;
+    letter-spacing:4px;
+}
+
+.cta h2{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:clamp(65px,11vw,160px);
+    line-height:.75;
+    letter-spacing:-10px;
+    margin-top:25px;
+}
+
+.cta a{
+    display:inline-block;
+    background:#0d0e0c;
+    color:white;
+    padding:17px 30px;
+    margin-top:50px;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#0d0e0c;
+    padding:35px 5vw;
+    display:flex;
+    justify-content:space-between;
+    color:#eee;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+footer span{
+    color:#666a62;
+}
+
+/* REVEAL */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:.8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        padding:70px 6vw;
+    }
+
+    .hero h1{
+        font-size:76px;
+        letter-spacing:-6px;
+    }
+
+    .hero-bottom{
+        display:block;
+    }
+
+    .hero-arrow{
+        margin-top:35px;
+    }
+
+    .intro{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    .project:nth-child(even){
+        margin-top:0;
+    }
+
+    .project-image{
+        height:500px;
+    }
+
+    .about{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .service{
+        grid-template-columns:45px 1fr auto;
+        gap:15px;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+
+@media(max-width:500px){
+
+    .hero h1{
+        font-size:61px;
+    }
+
+    .section-head{
+        display:block;
+    }
+
+    .section-head span{
+        display:block;
+        margin-top:25px;
+    }
+
+    .service h3{
+        font-size:25px;
+    }
+
+    .cta h2{
+        font-size:65px;
+        letter-spacing:-5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        ANDRO<span>.</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#work">WORK</a>
+        <a href="#about">ABOUT</a>
+        <a href="#services">SERVICES</a>
+    </div>
+
+    <a href="#contact" class="contact-btn">
+        LET'S TALK
+    </a>
+
+</nav>
+
+
+<section class="hero">
+
+    <div class="hero-top">
+        INDEPENDENT DIGITAL DESIGNER / 2026
+    </div>
+
+    <h1>
+        I BUILD<br>
+        <span>DIGITAL</span><br>
+        EXPERIENCES.
+    </h1>
+
+    <div class="hero-bottom">
+
+        <p>
+            I design and build modern websites for brands
+            that want to look different, feel professional
+            and leave a strong first impression.
+        </p>
+
+        <div class="hero-arrow">
+            ↓
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="intro reveal">
+
+    <h2>
+        DESIGN<br>
+        WITH<br>
+        PURPOSE.
+    </h2>
+
+    <p>
+        Every project starts with an idea.
+        My job is to turn that idea into a digital
+        experience that looks good, works smoothly
+        and makes the brand memorable.
+    </p>
+
+</section>
+
+
+<section class="work" id="work">
+
+    <div class="section-head reveal">
+
+        <h2>
+            SELECTED<br>
+            WORK.
+        </h2>
+
+        <span>
+            05 PROJECTS / 2026
+        </span>
+
+    </div>
+
+
+    <div class="projects">
+
+
+        <!-- NOVA -->
+
+        <a href="Index.html" class="project reveal">
+
+            <div class="project-image">
+
+                <div class="project-number">
+                    01 / DIGITAL
+                </div>
+
+                <img
+                src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85"
+                alt="Digital design project">
+
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <h3>NOVA</h3>
+                    <p>Digital Studio / Technology</p>
+                </div>
+
+                <div class="view">
+                    VIEW →
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- EMBER -->
+
+        <a href="restaurant.html" class="project reveal">
+
+            <div class="project-image">
+
+                <div class="project-number">
+                    02 / HOSPITALITY
+                </div>
+
+                <img
+                src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=85"
+                alt="Restaurant">
+
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <h3>EMBER</h3>
+                    <p>Restaurant / Hospitality</p>
+                </div>
+
+                <div class="view">
+                    VIEW →
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- FOLD -->
+
+        <a href="clothes.html" class="project reveal">
+
+            <div class="project-image">
+
+                <div class="project-number">
+                    03 / FASHION
+                </div>
+
+                <img
+                src="https://images.pexels.com/photos/36510904/pexels-photo-36510904.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Fashion">
+
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <h3>FOLD</h3>
+                    <p>Fashion / E-commerce</p>
+                </div>
+
+                <div class="view">
+                    VIEW →
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- PULSE -->
+
+        <a href="Fittnes.html" class="project reveal">
+
+            <div class="project-image">
+
+                <div class="project-number">
+                    04 / FITNESS
+                </div>
+
+                <img
+                src="https://images.pexels.com/photos/35540076/pexels-photo-35540076.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Fitness">
+
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <h3>PULSE</h3>
+                    <p>Fitness / Brand</p>
+                </div>
+
+                <div class="view">
+                    VIEW →
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- FORMA -->
+
+        <a href="architecture.html" class="project reveal">
+
+            <div class="project-image">
+
+                <div class="project-number">
+                    05 / ARCHITECTURE
+                </div>
+
+                <img
+                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85"
+                alt="Architecture">
+
+            </div>
+
+            <div class="project-info">
+
+                <div>
+                    <h3>FORMA</h3>
+                    <p>Architecture / Interior</p>
+                </div>
+
+                <div class="view">
+                    VIEW →
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="about reveal" id="about">
+
+    <div>
+
+        <div class="about-label">
+            ABOUT ME
+        </div>
+
+    </div>
+
+    <div class="about-text">
+
+        <h2>
+            I TURN<br>
+            IDEAS INTO<br>
+            <span>WEBSITES.</span>
+        </h2>
+
+        <p style="margin-top:35px;">
+            I'm a digital designer and web creator focused
+            on modern visual experiences, clean interfaces
+            and memorable brand websites.
+        </p>
+
+        <div class="skills">
+
+            <div class="skill">WEB DESIGN</div>
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JAVASCRIPT</div>
+            <div class="skill">UI DESIGN</div>
+            <div class="skill">BRANDING</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="services" id="services">
+
+    <div class="section-head reveal">
+
+        <h2>
+            WHAT I<br>
+            DO.
+        </h2>
+
+        <span>
+            SERVICES
+        </span>
+
+    </div>
+
+
+    <div class="service reveal">
+        <div class="service-num">01</div>
+        <h3>WEBSITE DESIGN</h3>
+        <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service reveal">
+        <div class="service-num">02</div>
+        <h3>LANDING PAGES</h3>
+        <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service reveal">
+        <div class="service-num">03</div>
+        <h3>BRAND WEBSITES</h3>
+        <div class="service-arrow">↗</div>
+    </div>
+
+    <div class="service reveal">
+        <div class="service-num">04</div>
+        <h3>UI / VISUAL DESIGN</h3>
+        <div class="service-arrow">↗</div>
+    </div>
+
+</section>
+
+
+<section class="cta" id="contact">
+
+    <small>
+        HAVE A PROJECT IN MIND?
+    </small>
+
+    <h2>
+        LET'S<br>
+        BUILD.
+    </h2>
+
+    <a href="mailto:hello@example.com">
+        START A PROJECT
+    </a>
+
+</section>
+
+
+<footer>
+
+    <div>
+        ANDRO © 2026
+    </div>
+
+    <span>
+        DIGITAL DESIGN / WEB
+    </span>
+
+    <span>
+        CAIRO / EGYPT
+    </span>
+
+</footer>
+
+
+<script>
+
+const elements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+            observer.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:.12
+});
+
+elements.forEach(element=>{
+    observer.observe(element);
+});
+
+</script>
+
+</body>
+</html>
